@@ -1,26 +1,31 @@
-# AirBnB clone - The console - Morocco
+# AirBnB Clone Console - Morocco
 
-Welcome to the AirBnB Clone Console! This is the first step towards building the AirBnB clone project, a full web application that mimics some functionalities of the popular accommodation rental platform, Airbnb.
+This is a project to build a clone of [Airbnb](https://www.airbnb.com/) - the popular accommodation rental platform.
+The project is divided into multiple phases, each one is built on top of the previous one.
 
-## Content:
+The first phase is the console app that will allow us to interact with the Airbnb clone from the command line.
+This is the first step towards building the AirBnB clone project.
 
-* [1 Introduction](#1-Introduction)
-* [2 Installation](#2-Installation)
-* [3 Usage](#3-Usage)
-* [4 Testing](#4-Testing)
-* [5 Authors](#5-Authors)
-* [6 License](#6-license)
+## Table of Contents
 
-# ``1-Introduction``
-Team project to build a clone of [AirBnB](https://www.airbnb.com/).
+* [1. Introduction](#1-Introduction)
+* [2. Installation](#2-Installation)
+* [3. Usage](#3-Usage)
+* [4. Testing](#4-Testing)
+* [5. Authors](#5-Authors)
+* [6. License](#6-license)
 
+## ``1-Introduction``
+
+The Airbnb Clone Console is a command line tool that allows you to interact with the Airbnb Clone project.
 
 ## ``2-Installation``
-1.  Clone This GitHub Repository To Your Local Machine.
 
-`git clone https://github.com/hagouchikarim/AirBnB_clone`
+1. Clone this GitHub repository to your local machine.
 
-2.  Jump to directory of project.
+`git clone https://github.com/hagouchikarim/AirBnB_clone.git`
+
+2.  Jump to the directory of the project.
 
 `cd AirBnB-Clone` 
 
@@ -70,7 +75,7 @@ $
 
 ## ``3-Usage``
 
-* Start the console in interactive mode:
+* Start the console in the interactive mode:
 
 ```bash
 $ ./console.py
@@ -163,7 +168,7 @@ edbc4a23-714a-4364-a52f-ac041042e4b0
 
 * unittest module
 * File extension ``` .py ```
-* Files and folders star with ```test_```
+* Files and folders start with ```test_```
 * Organization:for ```models/base.py```, unit tests in: ```tests/test_models/test_base.py```
 * Execution command: ```python3 -m unittest discover tests```
 * or: ```python3 -m unittest tests/test_models/test_base.py```
@@ -176,7 +181,7 @@ echo "python3 -m unittest discover tests" | bash
 
 ### run TEST non-interactive mode
 
-To run the tests in non-interactive mode, and discover all the test, you can use the command:
+To run the tests in non-interactive mode, and discover all the tests, you can use the command:
 
 ```bash
 python3 -m unittest discover tests
@@ -185,7 +190,5 @@ python3 -m unittest discover tests
 ## ``5-Authors``
 
 -   [Karim ElHagouchi](https://github.com/hagouchikarim/)
--   [Lyte Yassine Ennaour](https://github.com/yas19sin/)
-
-
+-   [Yassine Ennaour](https://github.com/yas19sin/)
 
