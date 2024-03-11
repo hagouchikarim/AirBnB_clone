@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Module for File State"""
 from models.base_model import BaseModel
 
 

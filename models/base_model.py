@@ -1,10 +1,20 @@
+#!/usr/bin/python3
+"""
+The BaseModel class is the base class for all models in the application.
+It defines common attributes and methods for all models.
+This module also defines the storage for the models.
+Each model is responsible for its own storage, so this module is just a
+helper to manage the serialization and deserialization of instances.
+"""
+import models
 from uuid import uuid4
 from datetime import datetime
-import models
+
 
 class BaseModel:
     """
-    A Baseclass for all the models that can defines common attributes and methods.
+    A Base class for all the models that can
+    define common attributes and methods.
     """
 
     def __init__(self, *args: any, **kwargs: any) -> None:
@@ -21,7 +31,8 @@ class BaseModel:
 
         for key, value in kwargs.items():
             if key in ["created_at", "updated_at"]:
-                self.__dict__[key] = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                self.__dict__[key] = datetime \
+                    .strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
             elif key != "__class__":
                 setattr(self, key, value)
 
@@ -35,12 +46,14 @@ class BaseModel:
         Returns:
             str: String representation of the instance.
         """
-        attributes_str = ", ".join([f"{key}={value}" for key, value in self.__dict__.items()])
+        attributes_str = ", ".join([f"{key}={value}"
+                                    for key, value in self.__dict__.items()])
         return f"[{self.__class__.__name__}] (id={self.id}, {attributes_str})"
 
     def save(self) -> None:
         """
-        This Function Update instance updated_at attribute and saves changes after.
+        This Function Update instance updated_at
+        attribute and saves changes after.
         """
         current_time = datetime.now()
         self.updated_at = current_time
@@ -60,5 +73,3 @@ class BaseModel:
         if not isinstance(obj_dict["updated_at"], str):
             obj_dict["updated_at"] = obj_dict["updated_at"].isoformat()
         return obj_dict
-
-

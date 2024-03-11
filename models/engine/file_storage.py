@@ -82,4 +82,3 @@ class FileStorage:
             pass
         except (TypeError, json.JSONDecodeError, OSError) as e:
             raise e
-

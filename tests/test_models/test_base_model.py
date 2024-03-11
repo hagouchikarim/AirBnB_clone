@@ -58,7 +58,6 @@ class BaseModelTestCase(unittest.TestCase):
         self.assertNotEqual(old_time, iNew.updated_at)
         self.assertGreater(iNew.updated_at, old_time)
 
-
         with patch('models.storage.save') as mock_function:
             obj = BaseModel()
             obj.save()
