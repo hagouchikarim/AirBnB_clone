@@ -46,9 +46,8 @@ class BaseModel:
         Returns:
             str: String representation of the instance.
         """
-        attributes_str = ", ".join([f"{key}={value}"
-                                    for key, value in self.__dict__.items()])
-        return f"[{self.__class__.__name__}] (id={self.id}, {attributes_str})"
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self) -> None:
         """

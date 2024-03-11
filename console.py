@@ -64,6 +64,7 @@ class HBNBCommand(cmd.Cmd):
         """Clear data storage :
         Usage: clear\n"""
         storage.all().clear()
+        storage.save()
         self.do_all(arg)
         print("** All data been clear! **")
 
@@ -187,6 +188,7 @@ class HBNBCommand(cmd.Cmd):
         if len(_iList) > 1:
             _iList[1] = _iList[1].replace('"', "").replace("'", "")
         gArgs = " ".join(_iList)
+        print(gArgs)
         if _Excu[0][1] in g_Methods:
             g_Methods[_Excu[0][1]](gArgs)
 
