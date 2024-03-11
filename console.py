@@ -130,7 +130,11 @@ class HBNBCommand(cmd.Cmd):
         if self.valid(arg, True, True):
             args = arg.split()
             instance_key = args[0]+"."+args[1]
-            value = re.search(r'"([^"]+)"', arg).group(1)
+            match = re.search(r'"([^"]+)"', arg)
+            if match:
+                value = match.group(1)
+            else:
+                value = ''
             setattr(storage.all()[instance_key], args[2], self.casting(value))
             storage.save()
 

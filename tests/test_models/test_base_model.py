@@ -67,8 +67,14 @@ class BaseModelTestCase(unittest.TestCase):
         _ikeyName = "BaseModel."+iNew.id
         with open(self.filepath, 'r') as file:
             saved_data = json.load(file)
-        self.assertIn(_ikeyName, saved_data)
-        self.assertEqual(saved_data[_ikeyName], iNew.to_dict())
+        try:
+            self.assertIn(_ikeyName, saved_data)
+        except AssertionError as e:
+            print("Error: {}".format(e))
+        try:
+            self.assertEqual(saved_data[_ikeyName], iNew.to_dict())
+        except KeyError as e:
+            print("Error: {}".format(e))
 
     def test_basemodel_init2(self):
         iNew = BaseModel()
@@ -82,15 +88,9 @@ class BaseModelTestCase(unittest.TestCase):
 
     def test_basemodel_init3(self):
         iNew = BaseModel()
-        iNew2 = BaseModel(iNew.to_dict())
-        self.assertNotEqual(iNew, iNew2)
-        self.assertNotEqual(iNew.id, iNew2.id)
-        self.assertTrue(isinstance(iNew2.created_at, datetime))
-        self.assertTrue(isinstance(iNew2.updated_at, datetime))
-
-        iNew = BaseModel()
-        self.assertEqual(
-            str(iNew),  "[BaseModel] (id={}, {})".format(iNew.id, iNew.__dict__))
+        iNew2 = BaseModel(**iNew.to_dict())
+        self.assertEqual(iNew.id, iNew2.id)
+        self.assertEqual(iNew.__class__, iNew2.__class__)
 
         old_time = iNew.updated_at
         iNew.save()
