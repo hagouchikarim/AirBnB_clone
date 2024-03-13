@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-"""Module for File Place"""
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    """a module for place file"""
+    """Module for File Place"""
     city_id = ""
     user_id = ""
     name = ""

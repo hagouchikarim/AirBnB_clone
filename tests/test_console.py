@@ -23,10 +23,7 @@ class TestHBNBCommand_prompt(unittest.TestCase):
     def test_empty_line(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd(""))
-            try:
-                self.assertEqual("", output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual("", output.getvalue().strip())
 
 
 class TestHBNBCommand_help(unittest.TestCase):
@@ -38,58 +35,40 @@ class TestHBNBCommand_help(unittest.TestCase):
                "EOF  all  clear  create  destroy  help  quit  show  update")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
     def test_help_quit(self):
         msg = "Quit command to exit the program"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help quit"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
     def test_help_EOF(self):
         msg = "Ctrl-D to exit the program"
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help EOF"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
     def test_help_create(self):
         msg = ("Creates a new instance :\n"
                "Usage: create <class name>")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help create"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
     def test_help_show(self):
         msg = ("Prints the string representation of an instance\n"
                "Usage: show <class name> <id>")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
     def test_help_destroy(self):
         msg = ("Deletes an instance\n"
                "Usage: destroy <class name> <id>")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help destroy"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
     def test_help_all(self):
         msg = ("Prints all string representation of all\n"
@@ -98,20 +77,14 @@ class TestHBNBCommand_help(unittest.TestCase):
                "Usage2: all <class name>")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
     def test_help_update(self):
         msg = ("Updates an instance by adding or updating attribute\n"
                "Usage: update <class> <id> <attribute> \"<value>\"")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
-            try:
-                self.assertEqual(msg, output.getvalue().strip())
-            except AssertionError as e:
-                print("Error: {}".format(e))
+            self.assertEqual(msg, output.getvalue().strip())
 
 
 class ConsoleTestCase(unittest.TestCase):
@@ -134,10 +107,7 @@ class ConsoleTestCase(unittest.TestCase):
             with patch('sys.stdout', new=StringIO()) as f:
                 expected = "** class name missing **"
                 HBNBCommand().onecmd(cmd)
-                try:
-                    self.assertCountEqual(expected, f.getvalue().strip())
-                except AssertionError as e:
-                    print("Error: {}".format(e))
+                self.assertCountEqual(expected, f.getvalue().strip())
 
         """ class doesn't exist """
         Non_Exists_class = ["create x", "update x",

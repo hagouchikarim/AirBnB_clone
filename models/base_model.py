@@ -1,48 +1,42 @@
 #!/usr/bin/python3
 """
-The BaseModel class is the base class for all models in the application.
-It defines common attributes and methods for all models.
-This module also defines the storage for the models.
-Each model is responsible for its own storage, so this module is just a
-helper to manage the serialization and deserialization of instances.
+Module defining the BaseModel class as the base class for all models.
+Handles initialization, serialization, and deserialization of instances.
 """
-import models
+
 from uuid import uuid4
 from datetime import datetime
+import models
 
 
 class BaseModel:
     """
-    A Base class for all the models that can
-    define common attributes and methods.
+    Base class for all models. Defines common attributes and methods.
     """
 
-    def __init__(self, *args: any, **kwargs: any) -> None:
+    def __init__(self, *args, **kwargs) -> None:
         """
-        This Function can initialize a new instance of the BaseModel class.
-
+        Initializes a new instance of the BaseModel class.
         Args:
-            *args: Variable length arguments.
+            *args: Variable length argument list.
             **kwargs: Arbitrary keyword arguments.
         """
-        self.id = kwargs.get('id', str(uuid4()))
-        self.created_at = kwargs.get('created_at', datetime.now())
-        self.updated_at = kwargs.get('updated_at', datetime.now())
-
-        for key, value in kwargs.items():
-            if key in ["created_at", "updated_at"]:
-                self.__dict__[key] = datetime \
-                    .strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-            elif key != "__class__":
-                setattr(self, key, value)
-
-        if not kwargs:
+        self.id = str(uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        if kwargs:
+            for iKey, value in kwargs.items():
+                if iKey in ["created_at", "updated_at"]:
+                    self.__dict__[iKey] = datetime.strptime(
+                        value, "%Y-%m-%dT%H:%M:%S.%f")
+                elif iKey != "__class__":
+                    self.__dict__[iKey] = value
+        else:
             models.storage.new(self)
 
     def __str__(self) -> str:
         """
-        This Function can returns a string representation of the instance.
-
+        Returns a string representation of the instance.
         Returns:
             str: String representation of the instance.
         """
@@ -51,24 +45,21 @@ class BaseModel:
 
     def save(self) -> None:
         """
-        This Function Update instance updated_at
-        attribute and saves changes after.
+        Updates the public instance updated_at attribute and saves changes.
         """
-        current_time = datetime.now()
-        self.updated_at = current_time
+        self.updated_at = datetime.now()
         models.storage.save()
 
-    def to_dict(self) -> dict[str, any]:
+    def to_dict(self) -> dict:
         """
         Returns a dictionary representation of the instance.
-
         Returns:
-            dict: Dictionary representation of our instance.
+            dict: Dictionary representation of the instance.
         """
-        obj_dict = {key: getattr(self, key) for key in self.__dict__}
-        obj_dict["__class__"] = self.__class__.__name__
-        if not isinstance(obj_dict["created_at"], str):
-            obj_dict["created_at"] = obj_dict["created_at"].isoformat()
-        if not isinstance(obj_dict["updated_at"], str):
-            obj_dict["updated_at"] = obj_dict["updated_at"].isoformat()
-        return obj_dict
+        todict = dict(self.__dict__)
+        todict["__class__"] = self.__class__.__name__
+        if not isinstance(todict["created_at"], str):
+            todict["created_at"] = todict["created_at"].isoformat()
+        if not isinstance(todict["updated_at"], str):
+            todict["updated_at"] = todict["updated_at"].isoformat()
+        return todict
