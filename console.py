@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance :
-        Usage: create <class name>\n"""
+Usage: create <class name>\n"""
         i_Classes = {
             "BaseModel": BaseModel,
             "User": User,
@@ -62,9 +62,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_clear(self, arg):
         """Clear data storage :
-        Usage: clear\n"""
+Usage: clear\n"""
         storage.all().clear()
-        storage.save()
         self.do_all(arg)
         print("** All data been clear! **")
 
@@ -94,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Prints the string representation of an instance
-        Usage: show <class name> <id>\n"""
+Usage: show <class name> <id>\n"""
         if self.valid(arg, True):
             gArgs = arg.split()
             _iKey = gArgs[0]+"."+gArgs[1]
@@ -102,7 +101,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """Deletes an instance
-        Usage: destroy <class name> <id>\n"""
+Usage: destroy <class name> <id>\n"""
         if self.valid(arg, True):
             gArgs = arg.split()
             _iKey = gArgs[0]+"."+gArgs[1]
@@ -111,9 +110,9 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints all string representation of all
-        instances based or not on the class name
-        Usage1: all
-        Usage2: all <class name>\n"""
+instances based or not on the class name
+Usage1: all
+Usage2: all <class name>\n"""
         gArgs = arg.split()
         _iLen = len(gArgs)
         _iList = []
@@ -142,7 +141,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """Updates an instance by adding or updating attribute
-        Usage: update <class> <id> <attribute> \"<value>\"\n"""
+Usage: update <class> <id> <attribute> \"<value>\"\n"""
         if self.valid(arg, True, True):
             gArgs = arg.split()
             _iKey = gArgs[0]+"."+gArgs[1]
@@ -164,7 +163,7 @@ class HBNBCommand(cmd.Cmd):
 
     def count(self, arg):
         """the number of instances of a class
-        Usage: <class name>.count()\n"""
+Usage: <class name>.count()\n"""
         iCount = 0
         for key in storage.all():
             if arg[:-1] in key:
@@ -188,7 +187,6 @@ class HBNBCommand(cmd.Cmd):
         if len(_iList) > 1:
             _iList[1] = _iList[1].replace('"', "").replace("'", "")
         gArgs = " ".join(_iList)
-        print(gArgs)
         if _Excu[0][1] in g_Methods:
             g_Methods[_Excu[0][1]](gArgs)
 

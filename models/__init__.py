@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" A reload of storage """
+""" Engine Reload Storage """
 from models.engine.file_storage import FileStorage
 
 storage = FileStorage()
